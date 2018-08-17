@@ -1,0 +1,15 @@
+@import "../../assets/scss/variables.scss";
+
+.searchbar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  padding: $small-padding 0;
+  .search-input {
+    width: 300px;
+  }
+  .search-button {
+    margin-left: $small-padding;
+  }
+}

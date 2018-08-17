@@ -1,11 +1,13 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {AnimalsListModule} from './animals-list/animals-list.module';
 import {LayoutModule} from './layout/layout.module';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {YoutubeService} from './common/youtube.service';
+import {ListModule} from './list/list.module';
+import {DataTableModule} from './data-table/data-table.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import {YoutubeService} from './common/youtube.service';
     HttpClientModule,
     AppRoutingModule,
     LayoutModule,
-    AnimalsListModule,
+    ListModule,
+    DataTableModule,
+    BrowserAnimationsModule
   ],
   providers: [
     HttpClient,

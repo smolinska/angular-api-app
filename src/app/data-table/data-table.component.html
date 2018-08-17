@@ -1,0 +1,24 @@
+<mat-table class="lessons-table mat-elevation-z8" [dataSource]="videos">
+
+  <ng-container matColumnDef="preview">
+    <mat-header-cell *matHeaderCellDef>Preview</mat-header-cell>
+    <mat-cell *matCellDef="let element" (click)="goToLink.emit(element)">
+      <img class="video-image" [src]="element.snippet.thumbnails.default.url">
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+    <mat-cell class="description-cell" *matCellDef="let element" (click)="goToLink.emit(element)">
+      {{element.snippet.title}}
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  <!--<mat-row *matRowDef="let row; columns: displayedColumns" href="https://www.youtube.com/watch?v=${element.id.videoId}"></mat-row>-->
+
+</mat-table>
+
+<!--https://www.youtube.com/watch?v=${{element.id.videoId}}`-->

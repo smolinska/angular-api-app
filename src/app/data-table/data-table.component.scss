@@ -1,0 +1,13 @@
+@import "../../assets/scss/variables.scss";
+
+.mat-column-preview, .mat-column-title {
+  cursor: pointer;
+}
+
+.mat-column-preview {
+  flex: 0 0 175px;
+}
+
+.video-image {
+  padding: $small-padding 0;
+}
