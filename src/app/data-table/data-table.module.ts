@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataTableComponent } from './data-table.component';
-import {MatInputModule, MatPaginatorModule, MatTableModule, MatProgressSpinnerModule, MatSortModule} from '@angular/material';
+import {
+  MatInputModule, MatPaginatorModule, MatTableModule, MatProgressSpinnerModule, MatSortModule,
+  MatIconModule
+} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -10,7 +13,8 @@ import {MatInputModule, MatPaginatorModule, MatTableModule, MatProgressSpinnerMo
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule,
   ],
   declarations: [
     DataTableComponent

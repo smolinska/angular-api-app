@@ -1,15 +1,21 @@
 @import "../../assets/scss/variables.scss";
 
+.header {
+  color: $button-red;
+}
 .searchbar {
   width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: baseline;
-  padding: $small-padding 0;
+  padding-bottom: $small-padding;
   .search-input {
     width: 300px;
   }
   .search-button {
     margin-left: $small-padding;
+    background: $button-red;
+    color: white;
+    font-weight: bold;
   }
 }

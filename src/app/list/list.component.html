@@ -1,8 +1,13 @@
+<div class="header">
+  <h1>
+    Videos
+  </h1>
+</div>
 <div class="searchbar">
-  <mat-input-container>
-    <input class="search-input" matInput placeholder="Search" #input>
+  <mat-input-container class="search-input">
+    <input matInput placeholder="Search" #input>
   </mat-input-container>
-  <button mat-raised-button color="warn" type="submit" class="search-button" (click)="onSubmit()">
+  <button mat-raised-button type="submit" class="search-button" (click)="onSubmit()">
     Search
   </button>
 </div>

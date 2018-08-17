@@ -9,7 +9,7 @@ import {MatTableDataSource} from '@angular/material';
 export class DataTableComponent implements OnInit, AfterViewInit {
   @Input() videos = [];
   @Output() goToLink = new EventEmitter();
-  displayedColumns = ['preview', 'title'];
+  displayedColumns = ['preview', 'title', 'favourite'];
   itemsPerPagePagination = [5, 10, 20, 50, 100, 200];
   dataSource = new MatTableDataSource();
 
