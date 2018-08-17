@@ -1,0 +1,32 @@
+@import "../../assets/scss/variables.scss";
+
+.navbar {
+  text-transform: uppercase;
+  font-weight: bold;
+  .navbar-brand {
+    font-size: xx-large;
+  }
+  .navbar-nav {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  li.nav-item {
+    padding: 0 $small-padding;
+    .nav-link {
+      font-size: large;
+      color: $bg-light-grey;
+      &--active, &:hover {
+        color: $button-red;
+      }
+    }
+  }
+}
+
+.main-container {
+  background: $bg-grey;
+  margin-top: $big-padding;
+  margin-bottom: $medium-padding;
+  padding: $medium-padding;
+  color: $bg-light-grey;
+}
