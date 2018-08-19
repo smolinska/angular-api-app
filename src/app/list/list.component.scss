@@ -1,19 +1,39 @@
 @import "../../assets/scss/variables.scss";
 
+%flex-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .header {
   color: $button-red;
 }
+
 .searchbar {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
+  @extend %flex-row;
   align-items: baseline;
   padding-bottom: $small-padding;
   .search-input {
-    width: 300px;
+    width: 420px;
   }
-  .search-button {
+}
+
+.filterbar {
+  @extend %flex-row;
+  .input-field {
+    width: 200px;
+  }
+  .input-field:nth-child(2) {
     margin-left: $small-padding;
+  }
+}
+
+.search {
+  @extend %flex-row;
+  margin-bottom: $medium-padding;
+  .search-button {
+    margin: $small-padding;
     background: $button-red;
     color: white;
     font-weight: bold;

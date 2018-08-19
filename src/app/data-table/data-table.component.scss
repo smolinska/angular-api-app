@@ -11,3 +11,11 @@
 .video-image {
   padding: $small-padding 0;
 }
+
+.no-data {
+  padding: $medium-padding;
+  width: 100%;
+  text-align: center;
+  color: $button-red;
+  font-weight: bold;
+}

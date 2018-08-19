@@ -26,3 +26,7 @@
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 
 </mat-table>
+
+<div *ngIf="videos.length === 0" class="no-data">
+  <p>No data.</p>
+</div>

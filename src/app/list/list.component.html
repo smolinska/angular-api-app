@@ -7,6 +7,24 @@
   <mat-input-container class="search-input">
     <input matInput placeholder="Search" #input>
   </mat-input-container>
+</div>
+<div class="filterbar">
+  <mat-form-field class="input-field">
+    <mat-select placeholder="Number of items" [(value)]="selectedNumberOfItems">
+      <mat-option *ngFor="let number of itemsPerPage" [value]="number">
+        {{number}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="input-field">
+    <mat-select placeholder="Sort by" [(value)]="selectedSortBy">
+      <mat-option *ngFor="let sortBy of sortByList" [value]="sortBy.value">
+        {{sortBy.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="search">
   <button mat-raised-button type="submit" class="search-button" (click)="onSubmit()">
     Search
   </button>

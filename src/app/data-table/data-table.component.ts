@@ -1,25 +1,19 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss']
 })
-export class DataTableComponent implements OnInit, AfterViewInit {
+export class DataTableComponent implements OnInit {
   @Input() videos = [];
   @Output() goToLink = new EventEmitter();
   displayedColumns = ['preview', 'title', 'favourite'];
-  itemsPerPagePagination = [5, 10, 20, 50, 100, 200];
-  dataSource = new MatTableDataSource();
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
   }
 
-  ngAfterViewInit() {
-    this.dataSource.data = this.videos;
+  ngOnInit() {
   }
 
 }

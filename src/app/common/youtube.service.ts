@@ -8,8 +8,8 @@ export class YoutubeService {
   constructor(private http: HttpClient) {
   }
 
-  public getVideosNoChannel(searchKey, maxResults) {
-    return this.http.get(`${environment.apiUrl}search?q=${searchKey}&maxResults=${maxResults}&part=snippet&key=${environment.apiKey}`);
+  public getVideosNoChannel(searchKey, maxResults, sortBy) {
+    return this.http.get(`${environment.apiUrl}search?q=${searchKey}&maxResults=${maxResults}&part=snippet&key=${environment.apiKey}&order=${sortBy}`);
   }
 
 }

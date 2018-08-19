@@ -1,50 +1,57 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {YoutubeService} from '../common/youtube.service';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort} from '@angular/material';
+import {Store} from '@ngrx/store';
+import {AppState} from '../common/reducers';
+import {GetVideos} from '../common/store/actions';
+import {Subscription} from 'rxjs/Subscription';
+import {getSearchedVideos} from '../common/store/reducers';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
   @ViewChild('input') input: ElementRef;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   public data = {};
   public dataSource = [];
+  public itemsPerPage = [5, 10, 20, 50, 100, 200];
+  public selectedNumberOfItems = 5;
+  public sortByList = [
+    {value: 'date', name: 'Date'},
+    {value: 'title', name: 'Title'},
+    {value: 'rating', name: 'Rating'}
+  ];
+  public selectedSortBy = 'date';
+  private subscriptions = new Subscription();
 
-  constructor(private service: YoutubeService) {
+  constructor(private store: Store<AppState>) {
   }
 
   ngOnInit() {
-    this.service.getVideosNoChannel('cute cats', 5).subscribe(
-      results => {
-        this.data = results;
-        this.dataSource = results['items'];
-        console.log(results);
-      },
-      err => {
-        console.log(err);
-      }
+    this.subscriptions.add(this.store.pipe(
+      getSearchedVideos
+      ).subscribe(
+      videos => this.dataSource = videos
+      )
     );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   onSubmit() {
-    this.service.getVideosNoChannel(this.input.nativeElement.value, 5).subscribe(
-      results => {
-        this.data = results;
-        this.dataSource = results['items'];
-        console.log(results);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    this.store.dispatch(new GetVideos({
+      serachKey: this.input.nativeElement.value, maxResults: this.selectedNumberOfItems,
+      sortBy: this.selectedSortBy
+    }));
   }
 
   goToVideo(event) {
-    console.log(event)
+    console.log(event);
     window.location.href = `https://www.youtube.com/watch?v=${event.id.videoId}`;
   }
 }

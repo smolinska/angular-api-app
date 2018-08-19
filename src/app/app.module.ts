@@ -8,6 +8,8 @@ import {YoutubeService} from './common/youtube.service';
 import {ListModule} from './list/list.module';
 import {DataTableModule} from './data-table/data-table.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     LayoutModule,
     ListModule,
     DataTableModule,
