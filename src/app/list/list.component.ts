@@ -2,7 +2,7 @@ import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core
 import {MatPaginator, MatSort} from '@angular/material';
 import {Store} from '@ngrx/store';
 import {AppState} from '../common/reducers';
-import {GetVideos} from '../common/store/actions';
+import {AddVideoToPlaylist, GetVideos} from '../common/store/actions';
 import {Subscription} from 'rxjs/Subscription';
 import {getSearchedVideos} from '../common/store/reducers';
 import {Filters} from '../common/shared';
@@ -67,14 +67,6 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   toggleFavourites(event) {
-    let favouriteVideos = JSON.parse(localStorage.getItem('favouriteVideos')) || [];
-    const videoId = event.id.videoId;
-
-    if (favouriteVideos.includes(videoId)) {
-      favouriteVideos = favouriteVideos.filter(item => item !== videoId);
-    } else {
-      favouriteVideos.push(event.id.videoId);
-    }
-    localStorage.setItem('favouriteVideos', JSON.stringify(favouriteVideos));
+    this.store.dispatch(new AddVideoToPlaylist(event.id));
   }
 }

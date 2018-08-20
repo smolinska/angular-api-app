@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {catchError, map, switchMap} from 'rxjs/operators';
-import {Router} from '@angular/router';
-import {AppState} from '../reducers';
-import {Store} from '@ngrx/store';
 import {of} from 'rxjs/observable/of';
 import {YoutubeService} from '../youtube.service';
-import {GetVideos, GetVideosError, GetVideosSuccess, VideosActionTypes} from './actions';
+import {
+  AddVideoToPlaylist, AddVideoToPlaylistError, AddVideoToPlaylistSuccess, GetVideos, GetVideosError, GetVideosSuccess,
+  VideosActionTypes
+} from './actions';
 
 @Injectable()
 export class VideosEffects {
@@ -20,9 +20,15 @@ export class VideosEffects {
     ))
   );
 
+  @Effect() addVideoToPlaylist$ = this.actions$.pipe(
+    ofType(VideosActionTypes.AddVideoToPlaylist),
+    switchMap((action: AddVideoToPlaylist) => this.service.addToPlaylist(action.payload.video).pipe(
+      map(result => new AddVideoToPlaylistSuccess(({response: result['items']}))),
+      catchError(error => of(new AddVideoToPlaylistError())),
+    ))
+  );
+
   constructor(private actions$: Actions,
-              private service: YoutubeService,
-              private router: Router,
-              private store$: Store<AppState>) {
+              private service: YoutubeService) {
   }
 }
