@@ -5,6 +5,7 @@ import {AppState} from '../common/reducers';
 import {GetVideos} from '../common/store/actions';
 import {Subscription} from 'rxjs/Subscription';
 import {getSearchedVideos} from '../common/store/reducers';
+import {Filters} from '../common/shared';
 
 @Component({
   selector: 'app-list',
@@ -20,11 +21,11 @@ export class ListComponent implements OnInit, OnDestroy {
   public itemsPerPage = [5, 10, 20, 50, 100];
   public selectedNumberOfItems = 5;
   public sortByList = [
-    {value: 'date', name: 'Date'},
-    {value: 'title', name: 'Title'},
-    {value: 'rating', name: 'Rating'}
+    {value: Filters.Date, name: 'Date'},
+    {value: Filters.Title, name: 'Title'},
+    {value: Filters.Favourite, name: 'Favourite'},
   ];
-  public selectedSortBy = 'date';
+  public selectedSortBy = Filters.Date;
   private subscriptions = new Subscription();
 
   constructor(private store: Store<AppState>) {
@@ -34,8 +35,12 @@ export class ListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.store.pipe(
       getSearchedVideos
       ).subscribe(
-      videos => this.dataSource = videos
-      )
+      videos => {
+        if (this.selectedSortBy === Filters.Favourite) {
+          videos = videos.sort((a, b) => b.isFavourite - a.isFavourite);
+        }
+        this.dataSource = videos;
+      })
     );
   }
 
@@ -44,9 +49,16 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    let sortBy;
+    if (this.selectedSortBy === Filters.Favourite) {
+      sortBy = Filters.Date;
+    } else {
+      sortBy = this.selectedSortBy;
+    }
+
     this.store.dispatch(new GetVideos({
       serachKey: this.input.nativeElement.value, maxResults: this.selectedNumberOfItems,
-      sortBy: this.selectedSortBy
+      sortBy: sortBy
     }));
   }
 
@@ -63,7 +75,6 @@ export class ListComponent implements OnInit, OnDestroy {
     } else {
       favouriteVideos.push(event.id.videoId);
     }
-
     localStorage.setItem('favouriteVideos', JSON.stringify(favouriteVideos));
   }
 }
