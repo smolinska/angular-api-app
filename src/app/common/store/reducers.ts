@@ -1,7 +1,7 @@
 import {VideosActions, VideosActionTypes} from './actions';
 import {createFeatureSelector, createSelector, select} from '@ngrx/store';
 import {pipe} from 'rxjs/util/pipe';
-import {filter} from 'rxjs/operators';
+import {filter, map} from 'rxjs/operators';
 import {isNullOrUndefined} from 'util';
 
 export interface VideosState {
@@ -27,4 +27,16 @@ export const searchedVideosSelector = createSelector(videosStateSelector, (state
 export const getSearchedVideos = pipe(
   select(searchedVideosSelector),
   filter(videos => !isNullOrUndefined(videos)),
+  map(videos => {
+    this.favourites = JSON.parse(localStorage.getItem('favouriteVideos')) || [];
+
+    videos.map(video => {
+      if (this.favourites.includes(video.id.videoId)) {
+        return video.isFavourite = true;
+      } else {
+        return video.isFavourite = false;
+      }
+    });
+    return videos;
+  })
 );

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DataTableComponent } from './data-table.component';
 import {
   MatInputModule, MatPaginatorModule, MatTableModule, MatProgressSpinnerModule, MatSortModule,
-  MatIconModule
+  MatIconModule, MatCheckboxModule
 } from '@angular/material';
 
 @NgModule({
@@ -15,6 +15,7 @@ import {
     MatSortModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    MatCheckboxModule,
   ],
   declarations: [
     DataTableComponent

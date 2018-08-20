@@ -17,7 +17,7 @@ export class ListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   public data = {};
   public dataSource = [];
-  public itemsPerPage = [5, 10, 20, 50, 100, 200];
+  public itemsPerPage = [5, 10, 20, 50, 100];
   public selectedNumberOfItems = 5;
   public sortByList = [
     {value: 'date', name: 'Date'},
@@ -51,7 +51,19 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   goToVideo(event) {
-    console.log(event);
     window.location.href = `https://www.youtube.com/watch?v=${event.id.videoId}`;
+  }
+
+  toggleFavourites(event) {
+    let favouriteVideos = JSON.parse(localStorage.getItem('favouriteVideos')) || [];
+    const videoId = event.id.videoId;
+
+    if (favouriteVideos.includes(videoId)) {
+      favouriteVideos = favouriteVideos.filter(item => item !== videoId);
+    } else {
+      favouriteVideos.push(event.id.videoId);
+    }
+
+    localStorage.setItem('favouriteVideos', JSON.stringify(favouriteVideos));
   }
 }

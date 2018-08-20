@@ -29,4 +29,5 @@
     Search
   </button>
 </div>
-<app-data-table [videos]="dataSource" (goToLink)="goToVideo($event)"></app-data-table>
+<app-data-table [videos]="dataSource" (goToLink)="goToVideo($event)" (toggleFavourites)="toggleFavourites($event)">
+</app-data-table>
