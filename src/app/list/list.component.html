@@ -5,7 +5,7 @@
 </div>
 <div class="searchbar">
   <mat-form-field class="search-input">
-      <input matInput placeholder="Search" #input>
+      <input matInput placeholder="Search" #input (keyup.enter)="onSubmit()">
   </mat-form-field>
 </div>
 <div class="filterbar">
