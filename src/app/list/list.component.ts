@@ -18,13 +18,9 @@ export class ListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   public data = {};
   public dataSource = [];
-  public itemsPerPage = [5, 10, 20, 50, 100];
+  public itemsPerPage = [5, 10, 20, 50];
   public selectedNumberOfItems = 5;
-  public sortByList = [
-    {value: Filters.Date, name: 'Date'},
-    {value: Filters.Title, name: 'Title'},
-    {value: Filters.Favourite, name: 'Favourite'},
-  ];
+  public sortByList = Object.values(Filters);
   public selectedSortBy = Filters.Date;
   private subscriptions = new Subscription();
 
@@ -70,10 +66,10 @@ export class ListComponent implements OnInit, OnDestroy {
     let favouriteVideos = JSON.parse(localStorage.getItem('favouriteVideos')) || [];
     const videoId = event.id.videoId;
 
-    if (favouriteVideos.includes(videoId)) {
+    if (!event.isFavourite) {
       favouriteVideos = favouriteVideos.filter(item => item !== videoId);
     } else {
-      favouriteVideos.push(event.id.videoId);
+      favouriteVideos.push(videoId);
     }
     localStorage.setItem('favouriteVideos', JSON.stringify(favouriteVideos));
   }

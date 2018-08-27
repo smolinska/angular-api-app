@@ -18,8 +18,8 @@
   </mat-form-field>
   <mat-form-field class="input-field">
     <mat-select placeholder="Sort by" [(value)]="selectedSortBy">
-      <mat-option *ngFor="let sortBy of sortByList" [value]="sortBy.value">
-        {{sortBy.name}}
+      <mat-option *ngFor="let sortBy of sortByList" [value]="sortBy">
+        {{sortBy}}
       </mat-option>
     </mat-select>
   </mat-form-field>

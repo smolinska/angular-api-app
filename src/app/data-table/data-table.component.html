@@ -17,7 +17,7 @@
   <ng-container matColumnDef="favourite">
     <mat-header-cell *matHeaderCellDef>Favourite</mat-header-cell>
     <mat-cell class="description-cell" *matCellDef="let element">
-      <mat-checkbox (click)="toggleFavourites.emit(element)" [checked]="element.isFavourite"></mat-checkbox>
+      <mat-checkbox [checked]="element.isFavourite" (change)="toggleFavourite(element)"></mat-checkbox>
     </mat-cell>
   </ng-container>
 

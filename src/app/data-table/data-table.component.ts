@@ -14,4 +14,9 @@ export class DataTableComponent {
   constructor() {
   }
 
+  toggleFavourite(element) {
+    element.isFavourite = !element.isFavourite;
+    this.toggleFavourites.emit(element);
+  }
+
 }
